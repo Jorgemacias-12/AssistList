@@ -3,15 +3,16 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.uic import loadUi
 
 from src.utils.MessageBox import message_box
-from src.utils.data import generate_data
+from src.utils.data import get_data
+from src.utils.logging import BaseWindow, log
 
-class MainWindow(QMainWindow):
+class MainWindow(BaseWindow):
+
+    user_data = get_data()
 
     def __init__(self):
 
-        super().__init__()
-
-        loadUi("src/gui/MainWindow.ui", self)
+        super().__init__("src/gui/MainWindow.ui")
 
         self.btn_init.clicked.connect(self.btn_init_on_click)
 
@@ -35,6 +36,26 @@ class MainWindow(QMainWindow):
             message_box("¡Atención!", "El campo de contraseña se encuentra vacío", "warning")
             return
             
-        message_box("Información", f"{username}/{password}", "info")
 
-        generate_data()
+        user = None
+
+        # obtener el usuario 
+        try:
+            user = self.user_data[username] 
+        except KeyError as error:
+            
+            message_box("¡Atención!", "El nombre de usuario no existe o no es válido", "info")
+            
+            log(self.logger, error.__str__())
+
+        log(self.logger, f"Se ha invocado btn_init con user {user}")
+
+
+        # Autenticación e invocar el siguiente frame
+
+        # Obviando la autenticación del nombre de usuario
+        # Solo se necesita comprobar la contraseña
+        log(self.logger, f"Propiedades del usuario: {user}")
+
+        if password == user["contraseña"]:
+            message_box("¡Exito!", "Se ha iniciado sesión de forma exitosa", "info")
