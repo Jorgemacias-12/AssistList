@@ -1,12 +1,13 @@
-from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QPixmap
-from PyQt5.uic import loadUi
+from PyQt5.QtWidgets import QLineEdit
 
 from src.utils.MessageBox import message_box
 from src.utils.data import get_data
 from src.utils.logging import BaseWindow, log
 
 class MainWindow(BaseWindow):
+
+    CHB_CHECKED = 2
 
     user_data = get_data()
 
@@ -18,6 +19,17 @@ class MainWindow(BaseWindow):
 
         username_image = QPixmap("resources/username.png")
         self.lbl_img_username.setPixmap(username_image)
+
+        self.chb_password.stateChanged.connect(self.show_password)
+
+    def show_password(self, state):
+
+        if state == self.CHB_CHECKED:
+        
+            self.txt_password.setEchoMode(QLineEdit.Normal)
+        else:
+            
+            self.txt_password.setEchoMode(QLineEdit.Password)
 
     def btn_init_on_click(self):
 
@@ -48,6 +60,8 @@ class MainWindow(BaseWindow):
             
             log(self.logger, error.__str__())
 
+            return
+
         log(self.logger, f"Se ha invocado btn_init con user {user}")
 
 
@@ -57,5 +71,11 @@ class MainWindow(BaseWindow):
         # Solo se necesita comprobar la contraseña
         log(self.logger, f"Propiedades del usuario: {user}")
 
+        if password != user["contraseña"]:
+            
+            message_box("¡Error!", "Contraseña o nombre de usuario no coinciden", "warning")
+
         if password == user["contraseña"]:
+            
+            # Invocar al frame aquí
             message_box("¡Exito!", "Se ha iniciado sesión de forma exitosa", "info")
