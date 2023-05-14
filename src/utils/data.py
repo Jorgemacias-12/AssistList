@@ -10,6 +10,18 @@ DATA_FILENAME = "users.json"
 DIRECTORY = os.path.join(os.getenv("APPDATA"), "com.jamr.assistList")
 FILE_PATH = os.path.join(DIRECTORY, DATA_FILENAME)
 
+
+
+def get_data():
+
+   generate_data()
+
+   with open(FILE_PATH, "r", encoding="utf-8") as json_file:
+
+      user_dictionary = json.load(json_file)
+
+      return user_dictionary
+
 def generate_data():
     
     user_dictionary = {}
@@ -21,15 +33,6 @@ def generate_data():
       password = generate_password()
 
       user_dictionary[key] = {'nombre': name, 'contraseña': password}
-
-    # Print generated users
-
-    # Only for debug purposes
-    # for key, user in user_dictionary.items():
-    #   print(f"Clave: {key}")
-    #   print(f"Nombre: {user['nombre']}")
-    #   print(f"Contraseña: {user['contraseña']}")
-    #   print("------------------------")
 
     # Create directory if it doesn't exist
     if not os.path.exists(DIRECTORY):
