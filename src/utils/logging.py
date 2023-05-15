@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
 from datetime import datetime
 
@@ -11,11 +12,15 @@ class BaseWindow(QMainWindow):
     
     LOGGER_FOLDER_NAME = f"com.jamr.assistList/logs/{datetime.now().strftime('%B')}"
 
+    APP_LOGO_PATH = "resources/app_logo.png"
+
     def __init__(self, ui_path):
 
         super().__init__()
 
         loadUi(ui_path, self)
+
+        self.setWindowIcon(QIcon(self.APP_LOGO_PATH))
 
         appdata_path = os.getenv("APPDATA")
 
