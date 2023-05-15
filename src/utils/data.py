@@ -14,7 +14,8 @@ FILE_PATH = os.path.join(DIRECTORY, DATA_FILENAME)
 
 def get_data():
 
-   generate_data()
+   if not os.path.exists(f"{FILE_PATH}"):
+      generate_data()
 
    with open(FILE_PATH, "r", encoding="utf-8") as json_file:
 
@@ -43,3 +44,13 @@ def generate_data():
     with open(FILE_PATH, 'w', encoding='utf-8') as json_file:
        
        json.dump(user_dictionary, json_file, ensure_ascii=False)
+
+
+subjects = {
+   0: "Probabilidad y estadistica",
+   1: "Estructuras de datos",
+   2: "Arquitectura de computadoras",
+   3: "Redes de computadoras",
+   4: "Liderazgo y emprendimiento",
+   5: "Métodos numericos",
+}
