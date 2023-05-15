@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>416</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -16,8 +19,17 @@
     <height>400</height>
    </size>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>420</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Inicio de sesión</string>
   </property>
   <property name="windowOpacity">
    <double>1.000000000000000</double>
@@ -25,11 +37,23 @@
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: white;</string>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextUnderIcon</enum>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <property name="tabShape">
    <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="dockNestingEnabled">
    <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks|QMainWindow::GroupedDragging</set>
   </property>
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>false</bool>
@@ -65,13 +89,18 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border: 0;
+border-bottom: 1px solid #ccc;
+</string>
+    </property>
    </widget>
    <widget class="QLabel" name="lbl_password">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>240</y>
-      <width>271</width>
+      <width>281</width>
       <height>31</height>
      </rect>
     </property>
@@ -96,6 +125,10 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border: 0;
+border-bottom: 1px solid #ccc;</string>
+    </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
     </property>
@@ -104,10 +137,22 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>350</y>
+      <y>370</y>
       <width>281</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #118ab2;
+color: white;
+border: 0px;
+font-family: &quot;arial&quot;;
+font-size: 14px;
+font-weight: bold;
+border-radius: 5px;</string>
     </property>
     <property name="text">
      <string>Iniciar sesión</string>
@@ -116,7 +161,7 @@
    <widget class="QLabel" name="lbl_img_username">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>10</y>
       <width>128</width>
       <height>128</height>
@@ -143,7 +188,7 @@
       <x>20</x>
       <y>320</y>
       <width>161</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -157,7 +202,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

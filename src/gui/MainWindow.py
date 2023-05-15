@@ -1,3 +1,6 @@
+import sys
+
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLineEdit
 
@@ -5,11 +8,15 @@ from src.utils.MessageBox import message_box
 from src.utils.data import get_data
 from src.utils.logging import BaseWindow, log
 
+from src.gui.SubjectSelection import SubjectSelection
+
 class MainWindow(BaseWindow):
 
     CHB_CHECKED = 2
 
     user_data = get_data()
+
+    subject_selector_window = None
 
     def __init__(self):
 
@@ -76,6 +83,11 @@ class MainWindow(BaseWindow):
             message_box("¡Error!", "Contraseña o nombre de usuario no coinciden", "warning")
 
         if password == user["contraseña"]:
-            
+
             # Invocar al frame aquí
             message_box("¡Exito!", "Se ha iniciado sesión de forma exitosa", "info")
+            
+            self.subject_selector = SubjectSelection(user)
+            self.subject_selector.show()
+
+            self.hide()
