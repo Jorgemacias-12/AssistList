@@ -5,4 +5,4 @@ class RegisterWindow(BaseWindow):
 
     def __init__(self):
 
-        super().__init__("src/gui/")
+        super().__init__("src/gui/RegisterWindow.ui")
