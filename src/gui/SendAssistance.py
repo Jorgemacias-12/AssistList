@@ -1,12 +1,9 @@
 from PyQt5.QtWidgets import QLabel
 
-import json
-
-from datetime import date
 from src.utils.logging import BaseWindow, log
 from src.utils.css import getCSS
-from src.utils.data import DIRECTORY
-
+from src.models.Assistance import Assistance
+from src.utils.MessageBox import message_box
 
 class SendAssistance(BaseWindow):
 
@@ -49,26 +46,10 @@ class SendAssistance(BaseWindow):
         self.subject_selection_window = SubjectSelection(self.user)
         self.subject_selection_window.show()
 
-        print("Todos son putos menos yo")
-
         log(self.logger, f"Se ha invocado {__name__}")
 
     def handle_save_assistance(self):
+        
+        message_box("¡Info!", "Se ha registrado la asistencia exitosamente", "info")
 
-        pass
-
-        # month = date.today().strftime("%B")
-
-        # data = {
-        #     f"{self.subject}": {
-        #         month: {
-        #             str(date.today().day): [
-        #                 self.user
-        #             ]
-        #         }
-        #     }
-        # }
-
-        # with open(f"{DIRECTORY}/assistances.json", "w", encoding="utf-8") as json_file:
-
-        #     json.dump(data, json_file, ensure_ascii=False)
+        assistance_manager = Assistance(self.subject, self.user)
