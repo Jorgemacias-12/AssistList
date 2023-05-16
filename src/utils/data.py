@@ -5,6 +5,7 @@ import os
 
 from src.utils.generation import generate_full_name
 from src.utils.generation import generate_password
+from src.utils.generation import generate_birthdate
 
 DATA_FILENAME = "users.json"
 DIRECTORY = os.path.join(os.getenv("APPDATA"), "com.jamr.assistList")
@@ -31,9 +32,10 @@ def generate_data():
 
       key = ''.join(random.choices(string.digits, k=9))
       name = generate_full_name()
+      birthday = generate_birthdate()
       password = generate_password()
-
-      user_dictionary[key] = {'nombre': name, 'contraseña': password}
+      
+      user_dictionary[key] = {'codigo de estudiante': key, 'nombre': name, 'cumpleaños': birthday, 'contraseña': password}
 
     # Create directory if it doesn't exist
     if not os.path.exists(DIRECTORY):
