@@ -55,21 +55,20 @@ class SendAssistance(BaseWindow):
 
     def handle_save_assistance(self):
 
-        month = date.today().strftime("%B")
-
-        data = {
-            f"{self.subject}": {
-                month: {
-                    str(date.today().day): [
-                        self.user
-                    ]
-                }
-            }
-        }
-
-        with open(f"{DIRECTORY}/assistances.json", "w", encoding="utf-8") as json_file:
-
-            json.dump(data, json_file, ensure_ascii=False)
-
-
         pass
+
+        # month = date.today().strftime("%B")
+
+        # data = {
+        #     f"{self.subject}": {
+        #         month: {
+        #             str(date.today().day): [
+        #                 self.user
+        #             ]
+        #         }
+        #     }
+        # }
+
+        # with open(f"{DIRECTORY}/assistances.json", "w", encoding="utf-8") as json_file:
+
+        #     json.dump(data, json_file, ensure_ascii=False)
