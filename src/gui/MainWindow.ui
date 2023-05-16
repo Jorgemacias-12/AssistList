@@ -185,10 +185,10 @@ border-radius: 5px;</string>
    <widget class="QCheckBox" name="chb_password">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>322</y>
+      <x>20</x>
+      <y>330</y>
       <width>131</width>
-      <height>31</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -208,6 +208,27 @@ border-radius: 5px;</string>
     </property>
     <property name="tristate">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_register_user">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>330</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #1568fc;
+font-weight: bold;
+text-decoration: underline;</string>
+    </property>
+    <property name="text">
+     <string>Registrarme</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
