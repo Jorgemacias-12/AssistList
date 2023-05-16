@@ -14,6 +14,8 @@ class SubjectSelection(BaseWindow):
 
     send_assistance_window = None    
 
+    login_window = None
+
     def __init__(self, user):
 
         # Cargar la interfaz
@@ -27,6 +29,10 @@ class SubjectSelection(BaseWindow):
         self.lbl_cuc_logo.setPixmap(cucosta_image)
 
         self.vertical_layout = self.frm_subjects
+
+        self.lbl_student_name.setText(f"Estudiante: {user['nombre']}")
+
+        self.btn_log_off.clicked.connect(self.close_session)
 
         for index, subject in subjects.items():
 
@@ -54,3 +60,12 @@ class SubjectSelection(BaseWindow):
         self.send_assistance_window.show()
 
         self.hide()
+
+    def close_session(self):
+
+        from src.gui.MainWindow import MainWindow
+
+        self.hide()
+
+        self.login_window = MainWindow()
+        self.login_window.show()
