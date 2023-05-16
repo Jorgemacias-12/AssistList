@@ -32,10 +32,10 @@ class MainWindow(BaseWindow):
     def show_password(self, state):
 
         if state == self.CHB_CHECKED:
-        
+            self.chb_password.setText("Esconder contraseña")
             self.txt_password.setEchoMode(QLineEdit.Normal)
         else:
-            
+            self.chb_password.setText("Mostrar contraseña")
             self.txt_password.setEchoMode(QLineEdit.Password)
 
     def btn_init_on_click(self):
@@ -85,8 +85,6 @@ class MainWindow(BaseWindow):
         if password == user["contraseña"]:
 
             # Invocar al frame aquí
-            message_box("¡Exito!", "Se ha iniciado sesión de forma exitosa", "info")
-            
             self.subject_selector = SubjectSelection(user)
             self.subject_selector.show()
 

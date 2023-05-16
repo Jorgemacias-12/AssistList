@@ -185,20 +185,29 @@ border-radius: 5px;</string>
    <widget class="QCheckBox" name="chb_password">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>161</width>
+      <x>13</x>
+      <y>322</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>12</pointsize>
+      <pointsize>8</pointsize>
      </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
     </property>
     <property name="text">
      <string>Mostrar contraseña</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="tristate">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
