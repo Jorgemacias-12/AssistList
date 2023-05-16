@@ -210,7 +210,7 @@ border-radius: 5px;</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="lbl_register_user">
+   <widget class="QPushButton" name="btn_register">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -219,16 +219,16 @@ border-radius: 5px;</string>
       <height>21</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
-     <string notr="true">color: #1568fc;
-font-weight: bold;
-text-decoration: underline;</string>
+     <string notr="true">background-color: transparent;
+color: #1568fc;
+font-weight: bold;</string>
     </property>
     <property name="text">
      <string>Registrarme</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

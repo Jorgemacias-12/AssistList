@@ -9,6 +9,7 @@ from src.utils.data import get_data
 from src.utils.logging import BaseWindow, log
 
 from src.gui.SubjectSelection import SubjectSelection
+from src.gui.RegisterWindow import RegisterWindow
 
 class MainWindow(BaseWindow):
 
@@ -17,6 +18,7 @@ class MainWindow(BaseWindow):
     user_data = get_data()
 
     subject_selector_window = None
+    register_window = None
 
     def __init__(self):
 
@@ -28,6 +30,7 @@ class MainWindow(BaseWindow):
         self.lbl_img_username.setPixmap(username_image)
 
         self.chb_password.stateChanged.connect(self.show_password)
+        self.btn_register.clicked.connect(self.handle_register)
 
     def show_password(self, state):
 
@@ -89,3 +92,10 @@ class MainWindow(BaseWindow):
             self.subject_selector.show()
 
             self.hide()
+
+    def handle_register(self):
+
+        self.hide()
+
+        self.register_window = RegisterWindow()
+        self.register_window.show()
