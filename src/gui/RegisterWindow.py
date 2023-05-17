@@ -3,6 +3,7 @@ from src.utils.css import getCSS
 
 from PyQt5.QtWidgets import QLabel, QLineEdit
 from src.utils.MessageBox import message_box
+from src.models.Register import Register
 
 class RegisterWindow(BaseWindow):
 
@@ -59,6 +60,14 @@ class RegisterWindow(BaseWindow):
             message_box("¡Atención!", "Por favor, ingresa la contraseña", "info")
             return
 
+        # Crear objeto estudiante
+        student = {
+            "codigo de estudiante": code,
+            "nombre": full_name,
+            "cumpleaños": birthdate,
+            "contraseña": password
+        }
 
+        register_manager = Register(student, code)
         
-        # print(f"{code} - {full_name} -  {birthdate} - {password}")
+        message_box("¡Exito!", "Estudiante registrado exitosamente","info")
