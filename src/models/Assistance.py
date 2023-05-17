@@ -4,7 +4,7 @@ import logging
 
 from datetime import date
 from src.utils.logging import log
-
+from src.utils.MessageBox import message_box
 
 class Assistance():
 
@@ -69,6 +69,10 @@ class Assistance():
         if not day in json_data[self.subject][month]:
             
             json_data[self.subject][month].setdefault(day, [])
+
+        if user in json_data[self.subject][month][day]: 
+            message_box("¡Atención!", "Ya tienes asistencia en la matería", "warning")
+            return
 
         assistances = json_data[self.subject][month][day]
         assistances.append(user)
