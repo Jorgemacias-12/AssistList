@@ -59,7 +59,7 @@ background-color: white;</string>
      <rect>
       <x>10</x>
       <y>150</y>
-      <width>601</width>
+      <width>411</width>
       <height>31</height>
      </rect>
     </property>
@@ -116,6 +116,28 @@ border-radius: 5px;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_assistance_viewer">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>150</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #3d405b;
+color: white;
+font-weight: bold;
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>Visualizar asistencia</string>
     </property>
    </widget>
   </widget>

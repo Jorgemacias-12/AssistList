@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QLabel, QPushButton, QHBoxLayout, QWidget
 from PyQt5.QtCore import Qt
 
 from src.gui.SendAssistance import SendAssistance
+from src.gui.AssistanceViewer import AssistanceViewer
 
 from src.utils.MessageBox import message_box
 from src.utils.data import subjects
@@ -13,8 +14,8 @@ from src.utils.css import getCSS
 class SubjectSelection(BaseWindow):
 
     send_assistance_window = None    
-
     login_window = None
+    assistance_viewer_window = None
 
     def __init__(self, user):
 
@@ -34,6 +35,8 @@ class SubjectSelection(BaseWindow):
 
         self.btn_log_off.clicked.connect(self.close_session)
 
+        self.btn_assistance_viewer.clicked.connect(self.handle_assistance_viewer)
+
         for index, subject in subjects.items():
 
             container = QHBoxLayout()
@@ -52,14 +55,19 @@ class SubjectSelection(BaseWindow):
 
             self.vertical_layout.addLayout(container)
 
-        pass
-
     def handle_subject_selected(self, subject):
         
         self.send_assistance_window = SendAssistance(self.user, subject)
         self.send_assistance_window.show()
 
         self.hide()
+
+    def handle_assistance_viewer(self):
+
+        self.hide()
+
+        self.assistance_viewer_window = AssistanceViewer()
+        self.assistance_viewer_window.show()
 
     def close_session(self):
 
