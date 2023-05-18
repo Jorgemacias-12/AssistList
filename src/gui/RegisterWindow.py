@@ -7,6 +7,8 @@ from src.models.Register import Register
 
 class RegisterWindow(BaseWindow):
 
+    main_window = None
+
     def __init__(self):
 
         super().__init__("src/gui/RegisterWindow.ui")
@@ -71,3 +73,10 @@ class RegisterWindow(BaseWindow):
         register_manager = Register(student, code)
         
         message_box("¡Exito!", "Estudiante registrado exitosamente","info")
+
+        self.hide()
+
+        from src.gui.MainWindow import MainWindow
+
+        self.main_window = MainWindow()
+        self.main_window.show()
