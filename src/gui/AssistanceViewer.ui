@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>822</width>
-    <height>619</height>
+    <width>819</width>
+    <height>614</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -188,6 +188,26 @@ padding: 5px;</string>
     </property>
     <property name="text">
      <string>Error:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_close">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>180</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #bb2929;
+color: white;
+font-size: 16px;
+border-radius: 10px;
+</string>
+    </property>
+    <property name="text">
+     <string>X</string>
     </property>
    </widget>
   </widget>
