@@ -24,11 +24,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install PyQt5
         pip install pyinstaller
     
     - name: Build with PyInstaller
       run: |
-        pyinstaller -n "AssistList" --add-data "resources;resources" --noconsole --onefile  __main__.py
+        pyinstaller -n "AssistList" --add-data "resources;resources" --noconsole --onefile -w --hiden-import __main__.py
         
       env:
         PYTHONPATH: ${{ env.PYTHONPATH }}
