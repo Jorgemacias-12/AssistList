@@ -26,10 +26,6 @@ class AssistanceViewer(BaseWindow):
 
     TABLE_COLUMNS_COUNT = 3
 
-    DAY_COLUMN = 0
-    STUDENT_CODE_COLUMN = 1
-    STUDENT_FULLNAME_COLUMN = 2
-
     month = None
     subject = None
 
