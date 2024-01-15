@@ -8,7 +8,6 @@ import calendar
 from src.utils.data import subjects
 from PyQt5.QtWidgets import QComboBox, QTableWidgetItem, QTableWidget
 from PyQt5.QtGui import QColor
-from PyQt5.QtCore import QTimer
 from src.utils.css import getCSS
 from src.utils.logging import log
 from src.utils.MessageBox import message_box
