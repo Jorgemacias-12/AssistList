@@ -14,9 +14,9 @@ from src.utils.logging import log
 from src.utils.MessageBox import message_box
 from datetime import date
 
-FILENAME = "assistances.json"
-DIRECTORY = os.path.join(os.getenv('APPDATA'), 'com.jamr.assistList')
-FILEPATH = os.path.join(DIRECTORY, FILENAME)
+ASSISTANCES_FILENAME = "assistances.json"
+ASSISTANCES_LOCATION_DIRECTORY = os.path.join(os.getenv('APPDATA'), 'com.jamr.assistList')
+ASSISTANCES_FILEPATH = os.path.join(ASSISTANCES_LOCATION_DIRECTORY, ASSISTANCES_FILENAME)
 
 
 class AssistanceViewer(BaseWindow):
@@ -130,7 +130,7 @@ class AssistanceViewer(BaseWindow):
             
     def read_assistance(self):
         try:
-            with open(FILEPATH, "r", encoding='utf-8') as json_file:
+            with open(ASSISTANCES_FILEPATH, "r", encoding='utf-8') as json_file:
                 self.json_data = json.load(json_file);            
         except FileNotFoundError as e:                  
             log(self.logger, f"{type(e).__name__}: {e}")
