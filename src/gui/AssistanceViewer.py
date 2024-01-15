@@ -6,11 +6,12 @@ import json
 import calendar
 
 from src.utils.data import subjects
-from PyQt5.QtWidgets import QComboBox, QTableWidgetItem
+from PyQt5.QtWidgets import QComboBox, QTableWidgetItem, QTableWidget
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QTimer
 from src.utils.css import getCSS
 from src.utils.logging import log
+from src.utils.MessageBox import message_box
 from datetime import date
 
 FILENAME = "assistances.json"
@@ -24,7 +25,7 @@ class AssistanceViewer(BaseWindow):
 
     COLUMN_SIZE = 200
 
-    COLUMNS = 3
+    TABLE_COLUMNS_COUNT = 3
 
     DAY_COLUMN = 0
     STUDENT_CODE_COLUMN = 1
@@ -39,8 +40,11 @@ class AssistanceViewer(BaseWindow):
 
         #  use actual month
         self.month = date.today().strftime("%B")
-
+        
         self.init_components()
+        
+        # Get the first subject to use it to show data
+        self.subject = self.cmb_subject.currentText();
 
         self.read_assistance()
         
@@ -74,97 +78,63 @@ class AssistanceViewer(BaseWindow):
         self.cmb_month.currentIndexChanged.connect(self.update_month)
         self.btn_close.clicked.connect(self.handle_error_close)
 
+        self.tbl_assistances.setEditTriggers(QTableWidget.NoEditTriggers)
+        
         self.lbl_error.hide()
 
     def update_assistances(self):
+        
+        self.tbl_assistances.setRowCount(0)
 
         try:
+            if self.json_data is None:
+                message_box("¡Error!", "El archivo de asistencias no existe", "critical")
 
+                return
+            
+            # Get data from assistance.json using current subject and month
+            # The subject is obtained in the constructor of this frame and
+            # The same procress is used in the month.
             month_data = self.json_data[self.subject][self.month]
-
-            month_data_size = len(month_data)
-            day_data_size = len(month_data.items())
-
-            total_data_size = month_data_size * day_data_size
-
-            # Set the row and column count
-            self.tbl_assistances.setRowCount(total_data_size)
-            # self.tbl_assistances.setColumnCount(self.COLUMNS)
-
-            print(month_data_size, day_data_size)
-
-            row = 0
-
-            for index, (key, data) in enumerate(month_data.items()):
-                
-                for student in data:
+                                    
+            # Get how many data is being loaded.
+            total_data_length = sum(len(data) for data in month_data.values())
+            
+            # Set row and column count into the table component
+            self.tbl_assistances.setColumnCount(self.TABLE_COLUMNS_COUNT)
+            
+            
+            # Iterate through the month_data variable to get the students
+            for day, students in month_data.items():
+                for student in students: # get student
+                    # Get current rowCount and increase it with the insertRow method
+                    row_position = self.tbl_assistances.rowCount()
+                    self.tbl_assistances.insertRow(row_position)
                     
-                    row += 1
+                    self.tbl_assistances.setItem(row_position, 0, QTableWidgetItem(day))
                     
-                    for column in range(self.COLUMNS):
-                        
-                        if column == self.DAY_COLUMN:
+                    # Get values of the student
+                    for col, (key, value) in enumerate(student.items()):
+                        item = QTableWidgetItem(str(value))
+                        self.tbl_assistances.setItem(row_position, col + 1, item) 
+        except KeyError as ex: 
+            
+            log(self.logger, f"No hay información disponile: {type(ex).__name__}")
 
-                            self.tbl_assistances.setItem(row, column, self.create_item(key))
-
-                        if column == self.STUDENT_CODE_COLUMN:
-
-                            self.tbl_assistances.setItem(row, column, self.create_item(student["codigo de estudiante"]))
-
-                        if column == self.STUDENT_FULLNAME_COLUMN:
-
-                            self.tbl_assistances.setItem(row, column, self.create_item(student["nombre"]))
-
-
-                        # print(f"{key} - {student}")
-
-                #         self.tbl_assistances.setItem(
-                #                     row, column, self.create_item(student["nombre"]))
-                # # for column in range(self.COLUMNS):
-                    
-                #     for student in data:
-
-                #         print(student["nombre"])
-
-                    pass
-
-
-            # for row, (key, data) in enumerate(month_data.items()):
-
-                # for column in range(self.COLUMNS):
-
-                    # print(column)
-
-                # for item in data ()
-
-            # for column in range(self.COLUMNS):
-
-            #     for row, (key, data) in enumerate(month_data.items()):
-                    
-            #         for item in data:
-
-            #             print (item)
-                    
-        except Exception as ex:
-
-            log(self.logger, f"No hay información disponible {type(ex).__name__}")
-
-            print(type(ex).__name__)
-
-            self.lbl_error.setText(
-                f"No hay registro de asistencias en el mes:  {ex}")
+            self.lbl_error.setText(f"No hay información disponible en el mes: {self.month}")
 
             traceback.print_exc()
-
+            
             self.lbl_error.show()
             self.btn_close.show()
-
+            
     def read_assistance(self):
-
-        with open(FILEPATH, "r", encoding='utf-8') as json_file:
-
-            self.json_data = json.load(json_file)
-
+        try:
+            with open(FILEPATH, "r", encoding='utf-8') as json_file:
+                self.json_data = json.load(json_file);            
+        except FileNotFoundError as e:                  
+            log(self.logger, f"{type(e).__name__}: {e}")
+        
     def update_subject(self):
 
         self.subject = self.cmb_subject.currentText()
@@ -172,7 +142,7 @@ class AssistanceViewer(BaseWindow):
 
     def update_month(self):
 
-        self.month = self.cmb_month.currentText()[0:3]
+        self.month = self.cmb_month.currentText()
         self.update_assistances()
 
     def create_item(self, text):
