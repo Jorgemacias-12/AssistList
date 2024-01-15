@@ -29,7 +29,7 @@ jobs:
     
     - name: Build with PyInstaller
       run: |
-        pyinstaller -n "AssistList" --add-data "resources;resources" --noconsole --onefile -w --hidden-import __main__.py
+        pyinstaller -n "AssistList" --add-data "resources;resources" --noconsole --onefile -w --hidden-import __main__.py __main__.py
         
       env:
         PYTHONPATH: ${{ env.PYTHONPATH }}
